@@ -18,6 +18,12 @@ class QuestsController < ApplicationController
 
   def destroy
     @quest = Quest.find(params[:id]).destroy!
+
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.remove(@quest)
+      end
+    end
   end
 
   private
