@@ -41,4 +41,14 @@ RSpec.describe "Quests", type: :request do
       expect(Quest.exists?(quest.id)).to be_falsey
     end
   end
+
+  describe "PATCH /update" do
+    let!(:quest) { create(:quest, name: "Old Quest", completed: false) }
+
+    it "allow user to toggle the quest completed status" do
+      patch quest_path(quest), params: { quest: { completed: true } }
+      quest.reload
+      expect(quest.completed).to be_truthy
+    end
+  end
 end

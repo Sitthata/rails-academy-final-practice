@@ -16,6 +16,16 @@ class QuestsController < ApplicationController
     end
   end
 
+  def update
+    @quest = Quest.find(params[:id])
+    respond_to do |format|
+      @quest.update(quest_params)
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(@quest, partial: "quests/quest", locals: { quest: @quest })
+      end
+    end
+  end
+
   def destroy
     @quest = Quest.find(params[:id]).destroy!
 
