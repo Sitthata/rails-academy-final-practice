@@ -1,4 +1,11 @@
-<div>
-  <h1 class="font-bold text-4xl">Academy Quest</h1>
-  <p>Find me in app/views/quest/index.html.erb</p>
-</div>
+<section class="container mx-auto px-4 py-8 space-y-5 mb-55">
+  <div class="justify-between my-20 md:flex space-y-10">
+    <div class="space-y-3">
+      <h1 class="text-3xl md:text-5xl font-bold">My Academy Quest</h1>
+      <span class="text-xl block">Pattaradanai Srichon</span>
+      <p>Welcome aboard! Here're my ODTS academy checklist</p>
+      <%= link_to "Visit My Brag Document", root_path, class: 'btn btn-primary mt-5', id: 'brag-link' %>
+    </div>
+    <%= image_tag "first_portrait.jpg", class: 'rounded-lg md:w-2/4' %>
+  </div>
+</section>
