@@ -3,5 +3,5 @@
     <%= form.check_box :completed, class: "checkbox" %>
     <span class="<%= quest.completed ? 'line-through text-gray-500' : '' %>"><%= quest.name %></span>
   <% end %>
-  <%= button_to "Delete", quest_path(quest), method: :delete, class: 'btn btn-error', data: {turbo_method: :delete} %>
+  <%= button_to "Delete", quest_path(quest), method: :delete, class: 'btn btn-error', data: {turbo_method: :delete}, id: "delete-#{quest.id}-button" %>
 </div>
