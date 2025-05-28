@@ -30,8 +30,20 @@ describe "Quests", type: :system do
       visit root_path
     end
     it "allows users to delete a quest" do
-      click_button id: "delete-#{quest.id}-button"
-      expect(page).not_to have_content("Quest to be deleted")
+      click_on_delete_quest_button(quest)
+      should_not_see_the_deleted_quest("Quest to be deleted")
+    end
+  end
+
+  context "when user toggles a quest's completed status via checkbox" do
+    let!(:quest) { create(:quest, name: "Quest to be toggled", completed: false) }
+    before do
+      visit root_path
+    end
+
+    it "updates the quest's completed status" do
+      toggle_completed_checkbox(quest)
+      should_see_updated_quest_status(quest)
     end
   end
 end
@@ -53,4 +65,22 @@ end
 
 def should_see_the_added_quest(name)
   expect(page).to have_content(name)
+end
+
+def click_on_delete_quest_button(quest)
+  click_button id: "delete-#{quest.id}-button"
+end
+
+def should_not_see_the_deleted_quest(name)
+  expect(page).not_to have_content(name)
+end
+
+def toggle_completed_checkbox(quest)
+  find_by_id("quest-#{quest.id}-completed-checkbox").click
+  sleep 1
+  quest.reload
+end
+
+def should_see_updated_quest_status(quest)
+  expect(quest.completed).to be_truthy
 end
