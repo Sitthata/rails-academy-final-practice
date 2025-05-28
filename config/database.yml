@@ -82,9 +82,7 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    database: rails_academy_final_practice_production
-    username: rails_academy_final_practice
-    password: <%= ENV["RAILS_ACADEMY_FINAL_PRACTICE_DATABASE_PASSWORD"] %>
+    url: <%= ENV["PRODUCTION_DATABASE_URL"] %>
   cache:
     <<: *primary_production
     database: rails_academy_final_practice_production_cache
